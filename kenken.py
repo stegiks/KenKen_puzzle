@@ -241,39 +241,7 @@ class KenKen(csp.CSP):
         return True 
 
 
-if __name__ == "__main__":
-
-    """
-    Dictionaries that represent switch case that other languages have.
-    The user decides which puzzle to solve.
-    """
-    switch_dict_puzzles = {
-        4 : "KenKen-4-Hard.txt",
-        5 : "KenKen-5-Hard.txt",
-        6 : "KenKen-6-Hard.txt",
-        7 : "KenKen-7-Hard-1.txt",
-        8 : "KenKen-8-Hard-1.txt",
-        9 : "KenKen-9-Hard-1.txt" 
-    }
-
-    switch_dict_sol = {
-        4 : "KenKen-4-Hard-Solution.txt",
-        5 : "KenKen-5-Hard-Solution.txt",
-        6 : "KenKen-6-Hard-Solution.txt",
-        7 : "KenKen-7-Hard-1-Solution.txt",
-        8 : "KenKen-8-Hard-1-Solution.txt",
-        9 : "KenKen-9-Hard-1-Solution.txt" 
-    }
-
-
-    size_puzzle = int(input("\nGive a number from 4 to 9 for the size of the puzzle : "))
-    if size_puzzle < 4 or size_puzzle > 9:
-        print("Wrong size")
-        sys.exit()
-
-    file_puzzle = switch_dict_puzzles[size_puzzle]
-    file_puzzle_sol = switch_dict_sol[size_puzzle]
-    
+def solve(file_puzzle):
     """
     Open the input file and split the lines. The first lines contains the size of the puzzle.
     After that it takes the remaining lines and exports a list that is explained in the class KenKen.
@@ -281,12 +249,12 @@ if __name__ == "__main__":
     with open(file_puzzle, "r") as file:
         puzzle = file.read()
         lines = [line.strip() for line in puzzle]
-    
+        
     size = int(lines[0])
     cliques = create_cliques(file_puzzle)
     for x in cliques:
         x["participants"] = tuple(x["participants"])
-    
+        
     cliques = [tuple(dic.values()) for dic in cliques]
 
     # Create the CSP
@@ -326,7 +294,6 @@ if __name__ == "__main__":
     )
 
     """Benchmarks test and solution"""
-    sol_dict = solution_dict(file_puzzle_sol)
 
     input_algo = int(input())
     start = time.time()
@@ -338,10 +305,38 @@ if __name__ == "__main__":
     print("Conflicts : ", kenken_csp.conflicts)
 
     dict_part = create_participants_dict(result)
-    if sol_dict == dict_part:
-        print("TEST SOLUTION : OK\n")
-    else:
-        print("TEST SOLUTION : WRONG\n")
 
-    print("The solution is :")
+    print("\nThe solution is :")
     print(dict_part, "\n")
+
+
+if __name__ == "__main__":
+
+    num_of_args = len(sys.argv)
+
+    if num_of_args == 2:
+        # If the user has given input file 
+        input_file = sys.argv[1]
+        solve(input_file)
+    else:
+        """
+        Dictionary that represent switch case that other languages have.
+        The user decides which puzzle to solve.
+        """
+        switch_dict_puzzles = {
+            4 : "KenKen-4-Hard.txt",
+            5 : "KenKen-5-Hard.txt",
+            6 : "KenKen-6-Hard.txt",
+            7 : "KenKen-7-Hard-1.txt",
+            8 : "KenKen-8-Hard-1.txt",
+            9 : "KenKen-9-Hard-1.txt" 
+        }
+
+        size_puzzle = int(input("\nGive a number from 4 to 9 for the size of the puzzle : "))
+        if size_puzzle < 4 or size_puzzle > 9:
+            print("Wrong size")
+            sys.exit()
+
+        file_puzzle = switch_dict_puzzles[size_puzzle]
+        
+        solve(file_puzzle)
