@@ -265,20 +265,16 @@ def solve(file_puzzle):
     back_mrv = functools.partial(csp.backtracking_search, kenken_csp, csp.mrv)
     fc = functools.partial(csp.backtracking_search, kenken_csp, csp.first_unassigned_variable, csp.unordered_domain_values, csp.forward_checking)
     fc_mrv = functools.partial(csp.backtracking_search, kenken_csp, csp.mrv, csp.unordered_domain_values, csp.forward_checking)
-    fc_mrv_lcv = functools.partial(csp.backtracking_search, kenken_csp, csp.mrv, csp.lcv, csp.forward_checking)
     mac = functools.partial(csp.backtracking_search, kenken_csp, csp.first_unassigned_variable, csp.unordered_domain_values, csp.mac)
     mac_mrv = functools.partial(csp.backtracking_search, kenken_csp, csp.mrv, csp.unordered_domain_values, csp.mac)
-    mac_mrv_lcv = functools.partial(csp.backtracking_search, kenken_csp, csp.mrv, csp.lcv, csp.mac)
 
     switch_dict_algo = {
         1 : back,
         2 : back_mrv,
         3 : fc,
         4 : fc_mrv,
-        5 : fc_mrv_lcv,
-        6 : mac,
-        7 : mac_mrv,
-        8 : mac_mrv_lcv
+        5 : mac,
+        6 : mac_mrv
     }
 
     print(
@@ -287,10 +283,8 @@ def solve(file_puzzle):
         "2 : BACKTRACKING + MRV\n"
         "3 : FC\n"
         "4 : FC + MRV\n"
-        "5 : FC + LCV + MRV\n"
-        "6 : MAC\n"
-        "7 : MAC + MRV\n"
-        "8 : MAC + LCV + MRV\n"
+        "5 : MAC\n"
+        "6 : MAC + MRV\n"
     )
 
     """Benchmarks test and solution"""
