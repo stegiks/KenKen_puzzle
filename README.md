@@ -39,7 +39,7 @@ Here's a simple example of a 4x4 puzzle input file
 7#9-10-14#+
 7#4-5-8#+
 ```
-The participants represent the boxes which a clique consists of and a 4x4 puzzle participants look like this
+The participants represent the boxes that a clique consists of and a 4x4 puzzle participants look like this
 
 ```
 0  1  2  3
