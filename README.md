@@ -1,6 +1,6 @@
 # KenKen_puzzle
 
-solved-4x4-kenken-puzzle.png
+![alt text](https://github.com/stegiks/KenKen_puzzle/blob/main/image/solved-4x4-kenken-puzzle.ppg?raw=true)
 
 A python [KenKen](https://en.wikipedia.org/wiki/KenKen) puzzle solver using [CSP](https://en.wikipedia.org/wiki/Constraint_satisfaction_problem) and backtracking algorithms like:
 
