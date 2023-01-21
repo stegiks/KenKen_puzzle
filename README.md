@@ -1,5 +1,7 @@
 # KenKen_puzzle
 
+solved-4x4-kenken-puzzle.png
+
 A python [KenKen](https://en.wikipedia.org/wiki/KenKen) puzzle solver using [CSP](https://en.wikipedia.org/wiki/Constraint_satisfaction_problem) and backtracking algorithms like:
 
 - [BACKTRACKING (page 8-9)](https://www.math.unipd.it/~frossi/cp-school/CPschool05notes.pdf)
