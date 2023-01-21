@@ -101,10 +101,12 @@ def legal_operation(dom, operation, target):
 def generate_domains(list_cl, size):
 
     """
-    Returns a dictionary that contains all the possible values that a clique can take.
-    If the size of var1 is 3 and the size of the board is 4 then the values of this variable are like that:
+    Returns a dictionary that contains all the possible values that a clique 
+    can take and agrees with the operation and target.
+    If the size of var1 is 3, the size of the board is 4, operation is + and
+    target is 7 then the values of this variable are like that:
 
-    domain[var1] = [(1,1,1), (1,1,2), (1,2,1), ... , (3,4,4), (4,4,4)] 
+    domain[var1] = [(1,3,3), (3,1,3), (3,3,1), ... , (4,1,2), (4,2,1)] 
     """
     domain = {}
     for cl in list_cl:
@@ -233,12 +235,6 @@ class KenKen(csp.CSP):
     Also if the 2 variables are conflicting, they don't satisfy the constraints.
     """
     def constraints(self, cl1, dom1, cl2, dom2):
-        # if not legal_operation(dom1, cl1[2], cl1[0]):
-        #     self.conflicts+= 1
-        #     return False
-        # if not legal_operation(dom2, cl2[2], cl2[0]):
-        #     self.conflicts+= 1
-        #     return False
         if conflict(cl1, dom1, cl2, dom2, self.size):
             self.conflicts+= 1
             return False
@@ -270,7 +266,7 @@ if __name__ == "__main__":
     }
 
 
-    size_puzzle = int(input("Give a number from 4 to 9 for the size of the puzzle : "))
+    size_puzzle = int(input("\nGive a number from 4 to 9 for the size of the puzzle : "))
     if size_puzzle < 4 or size_puzzle > 9:
         print("Wrong size")
         sys.exit()
@@ -296,6 +292,7 @@ if __name__ == "__main__":
     # Create the CSP
     kenken_csp = KenKen(cliques, size)
 
+    # Make partial functions with pre-specified arguments and use a switch dictionary
     back = functools.partial(csp.backtracking_search, kenken_csp)
     back_mrv = functools.partial(csp.backtracking_search, kenken_csp, csp.mrv)
     fc = functools.partial(csp.backtracking_search, kenken_csp, csp.first_unassigned_variable, csp.unordered_domain_values, csp.forward_checking)
@@ -328,6 +325,7 @@ if __name__ == "__main__":
         "8 : MAC + LCV + MRV\n"
     )
 
+    """Benchmarks test and solution"""
     sol_dict = solution_dict(file_puzzle_sol)
 
     input_algo = int(input())
@@ -346,222 +344,4 @@ if __name__ == "__main__":
         print("TEST SOLUTION : WRONG\n")
 
     print("The solution is :")
-    print(dict_part)
-
-
-    # algo = input("Choose an algorithm between FC, MAC and MIN_C for min conflicts: ")
-    # if algo != "FC" and algo != "MAC" and algo != "MIN_C":
-    #     print("Wrong algorithm")
-    #     sys,exit()
-
-    # if algo != "MIN_C":
-    #     heuristic = input("Now choose a heuristic between MRV, LCV, B for both heuristics or N for no heuristic : ")
-    #     if heuristic != "MRV" and heuristic != "LCV" and heuristic != "B" and heuristic != "N":
-    #         print("Wrong entry for heuristic")
-    #         sys.exit()
-
-    # """
-    # Benchmarks for different versions of FC, MAC and MIN_C
-    # """
-
-    # if algo == "FC" and heuristic == "N":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.forward_checking)
-    #     end = time.time()
-
-    #     print("Execution time of FORWARD CHECKING is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)
-
-    # elif algo == "FC" and heuristic == "MRV":
-
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.forward_checking, select_unassigned_variable = csp.mrv)
-    #     end = time.time()
-
-    #     print("Execution time of FORWARD CHECKING + MRV is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)
-
-    # elif algo == "FC" and heuristic == "LCV":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.forward_checking, order_domain_values = csp.lcv)
-    #     end = time.time()
-
-    #     print("Execution time of FORWARD CHECKING + LCV is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)
-
-    # elif algo == "FC" and heuristic == "B":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.forward_checking, order_domain_values = csp.lcv, select_unassigned_variable = csp.mrv)
-    #     end = time.time()
-
-    #     print("Execution time of FORWARD CHECKING + MRV + LCV is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)
-
-    # elif algo == "MAC" and heuristic == "N":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.mac)
-    #     end = time.time()
-
-    #     print("Execution time of MAC is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)
-    
-    # elif algo == "MAC" and heuristic == "MRV":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.mac, select_unassigned_variable = csp.mrv)
-    #     end = time.time()
-
-    #     print("Execution time of MAC + MRV is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)    
-        
-    # elif algo == "MAC" and heuristic == "LCV":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.mac, order_domain_values = csp.lcv)
-    #     end = time.time()
-
-    #     print("Execution time of MAC + LCV is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-        
-    #     print("The solution is :")
-    #     print(dict_part)
-
-    # elif algo == "MAC" and heuristic == "B":
-        
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     for_ch_mrv = csp.backtracking_search(kenken_csp, inference = csp.mac, order_domain_values = csp.lcv, select_unassigned_variable = csp.mrv)
-    #     end = time.time()
-
-    #     print("Execution time of MAC + LCV + MRV is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     dict_part = create_participants_dict(for_ch_mrv)
-    #     if sol_dict == dict_part:
-    #         print("TEST SOLUTION : OK")
-    #     else:
-    #         print("TEST SOLUTION : WRONG")
-
-    #     print("The solution is :")
-    #     print(dict_part)
-    
-    # elif algo == "MIN_C":
-
-    #     print("\n")
-    #     sol_dict = solution_dict(file_puzzle_sol)
-
-    #     start = time.time()
-    #     min_con = csp.min_conflicts(kenken_csp)
-    #     end = time.time()
-
-    #     print("Execution time of MIN CONFLICTS is : ", (end - start), "s")
-    #     print("Assigns : ", kenken_csp.nassigns)
-    #     print("Conflicts : ", kenken_csp.conflicts)
-
-    #     if min_con != None:
-    #         dict_part = create_participants_dict(min_con)
-    #         if sol_dict == dict_part:
-    #             print("TEST SOLUTION : OK")
-    #         else:
-    #             print("TEST SOLUTION : WRONG")
-
-    #         print("The solution is :")
-    #         print(dict_part)
-    #     else:
-    #         print("The solution is :")
-    #         print("None")
+    print(dict_part, "\n")
