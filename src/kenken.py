@@ -278,7 +278,7 @@ def solve(file_puzzle):
     }
 
     print(
-        "\nGive a number from 1 to 8 to choose an algorithm :\n"
+        "\nGive a number from 1 to 6 to choose an algorithm :\n"
         "1 : BACKTRACKING\n"
         "2 : BACKTRACKING + MRV\n"
         "3 : FC\n"
