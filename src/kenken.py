@@ -298,10 +298,14 @@ def solve(file_puzzle):
     print("Assigns : ", kenken_csp.nassigns)
     print("Conflicts : ", kenken_csp.conflicts)
 
-    dict_part = create_participants_dict(result)
 
+    dict_part = create_participants_dict(result)
+    new_dict = {}
+    for i in range(len(dict_part)):
+        new_dict[i] = dict_part[i]
+    
     print("\nThe solution is :")
-    print(dict_part, "\n")
+    print(new_dict)
 
 
 if __name__ == "__main__":

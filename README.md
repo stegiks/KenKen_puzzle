@@ -56,12 +56,11 @@ When you have created your file you should run the below command
 python kenken.py <file-name>
 ```
 
-The solution that the program produces is like this
+The solution that the program produces is like this where the fisrt number is the participant and the second its value
 
 ```powershell
-{0: 3, 1: 2, 2: 4, 6: 3, 3: 1, 7: 2, 11: 3, 15: 4, 12: 1, 13: 3, 9: 4, 10: 1, 14: 2, 4: 4, 5: 1, 8: 2}
+{0: 3, 1: 2, 2: 4, 3: 1, 4: 4, 5: 1, 6: 3, 7: 2, 8: 2, 9: 4, 10: 1, 11: 3, 12: 1, 13: 3, 14: 2, 15: 4}
 ```
-Where the first number is the participant and the second its value
 
 ## Sources
 
