@@ -318,12 +318,12 @@ if __name__ == "__main__":
         The user decides which puzzle to solve.
         """
         switch_dict_puzzles = {
-            4 : "kenken_examples/KenKen-4-Hard.txt",
-            5 : "kenken_examples/KenKen-5-Hard.txt",
-            6 : "kenken_examples/KenKen-6-Hard.txt",
-            7 : "kenken_examples/KenKen-7-Hard-1.txt",
-            8 : "kenken_examples/KenKen-8-Hard-1.txt",
-            9 : "kenken_examples/KenKen-9-Hard-1.txt" 
+            4 : "../kenken_examples/KenKen-4-Hard.txt",
+            5 : "../kenken_examples/KenKen-5-Hard.txt",
+            6 : "../kenken_examples/KenKen-6-Hard.txt",
+            7 : "../kenken_examples/KenKen-7-Hard-1.txt",
+            8 : "../kenken_examples/KenKen-8-Hard-1.txt",
+            9 : "../kenken_examples/KenKen-9-Hard-1.txt" 
         }
 
         size_puzzle = int(input("\nGive a number from 4 to 9 for the size of the puzzle : "))
