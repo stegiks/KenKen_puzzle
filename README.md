@@ -1,6 +1,4 @@
-# KenKen_puzzle
-
-![GitHub watchers](https://img.shields.io/github/watchers/stegiks/KenKen_puzzle?label=viewers&style=social)
+# KenKen_puzzle ![GitHub watchers](https://img.shields.io/github/watchers/stegiks/KenKen_puzzle?label=viewers&style=social)
 
 A python [KenKen](https://en.wikipedia.org/wiki/KenKen) puzzle solver using [CSP](https://en.wikipedia.org/wiki/Constraint_satisfaction_problem) and backtracking algorithms like:
 
