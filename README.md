@@ -1,4 +1,4 @@
-# KenKen_puzzle ![GitHub watchers](https://img.shields.io/github/watchers/stegiks/KenKen_puzzle?label=viewers&style=social)
+# KenKen_puzzle
 
 <img src = "image/5x5.png" width = "550">
 
