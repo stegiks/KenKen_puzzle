@@ -1,4 +1,4 @@
-# KenKen_puzzle ![visitor badge](https://visitor-badge.glitch.me/badge?page_id=jstegiks.KenKen_puzzle&right_color=red)
+# KenKen_puzzle
 
 <img src = "image/5x5.png" width = "550">
 
